@@ -48,9 +48,9 @@ resource "aws_subnet" "dev-subnet-1" {
 data "aws_vpc" "existing-vpc" {
     default = true
 }
-resource "aws_subnet" "dev-subnet-2" {
+resource "aws_subnet" "dev-subnet-3" {
     vpc_id = data.aws_vpc.existing-vpc.id
-    cidr_block = "172.31.48.0/20"           #default VPC CIDR 172.31.0.0./16 + 3 subnets 172.31.0.0/20 172.31.16.0/20 172.31.32.0/20
+    cidr_block = "172.31.64.0/20"           #default VPC CIDR 172.31.0.0./16 + 3 subnets 172.31.0.0/20 172.31.16.0/20 172.31.32.0/20
     availability_zone = "ap-southeast-2a"
        tags = {
         Name = "subnet-default"
