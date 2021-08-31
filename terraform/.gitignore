@@ -5,8 +5,8 @@
 *.tfstate
 *.tfstate.*
 
-# tf variables file, ma include sensitive data
-*.tfvars
+# tf variables file, may include sensitive data
+#*.tfvars
 
 
 
