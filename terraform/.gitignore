@@ -8,5 +8,12 @@
 # tf variables file, may include sensitive data
 #*.tfvars
 
+#Ignore CLI config files
+.terraformrc
+terraform.rc
+
+#ignore folder (MAC/OSX) metadata
+.DS_Store
+
 
 
