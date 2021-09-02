@@ -211,12 +211,15 @@ resource "aws_instance" "myapp-server" {
   associate_public_ip_address = true
 
   #Key pairs to SSH - server-key-pair manually by UI
-  key_name = "server-key-pair"                   # hardcoded key-pair name as on aws
-  # key_name = aws_key_pair.ssh-key.key_name     # ObjectTYPE.ObjectName.AttributeName
+  # key_name = "server-key-pair"                   # hardcoded key-pair name as on aws
+  key_name = aws_key_pair.ssh-key.key_name     # ObjectTYPE.ObjectName.AttributeName
 
-/*
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#user_data
 # user_data will only get excuted once on intitial run
+# ssh into machine and 
+# docker ps
+
   user_data = file("entry-script.sh")
             /* 
             <<EOF
@@ -227,23 +230,22 @@ resource "aws_instance" "myapp-server" {
                 docker run -p 8080:80 nginx
             EOF
              */ 
-#ssh into machine and 
-#docker ps
-*/
+
+
   tags = {
     Name = "${var.env_prefix}-server"
   }
 }
 
-/*
+
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 # automatic ssh key(server-key) creation or create 
 # ssh-keygen - to create key-pair in ~/.ssh/id_rsa.pub
 resource "aws_key_pair" "ssh-key" {
-  key_name   = "server-key"
+  key_name   = "server-key"  #name that will appear on AWS
   public_key = file(var.public_key_location)  #read from a file
 }
-*/
+
 
 output "ec2_public_ip" {
     value = aws_instance.myapp-server.public_ip
