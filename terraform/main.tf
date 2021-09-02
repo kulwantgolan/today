@@ -29,6 +29,7 @@ variable env_prefix {}
 variable my_ip {}
 variable instance_type {}
 variable public_key_location {}
+variable private_key_location {} 
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # Create VPC, subnet, igw, route table
@@ -220,7 +221,7 @@ resource "aws_instance" "myapp-server" {
 # ssh into machine and 
 # docker ps
 
-  user_data = file("entry-script.sh")
+  # user_data = file("entry-script.sh")
             /* 
             <<EOF
                 #!/bin/bash
@@ -231,7 +232,42 @@ resource "aws_instance" "myapp-server" {
             EOF
              */ 
 
+# https://www.terraform.io/docs/language/resources/provisioners/syntax.html
+# https://www.terraform.io/docs/language/resources/provisioners/connection.html
+# https://www.terraform.io/docs/language/resources/provisioners/remote-exec.html
+# https://www.terraform.io/docs/language/resources/provisioners/local-exec.html
+# instead of user_data use provisioners to run initial setupp commands 
+# Note: remote exec - executing on remote server
+# user_data is intial script passed on to AWS to run on remote server
 
+/*
+  connection {
+    type     = "ssh"
+    host     = self.public_ip
+    user     = "ec2-user"
+    private_key = file(var.private_key_location)
+    
+  }
+
+ #copy files
+  provisioner "file" {
+    source = "entry-script.sh"
+    destination = "/home/ec2-user/entry-script-on-ec2.sh"
+  }
+
+ # execute file on remote server
+  provisioner "remote-exec" {
+    #script = file("/home/ec2-user/entry-script-on-ec2.sh") # was erroring out - skipped
+    script = "entry-script.sh"
+  }
+
+#idea: invoke it after the resource is created
+  provisioner "local-exec" {
+    command = "echo ${self.public_ip} > public_ip.txt"
+  }
+# user local provider instead: https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file
+
+*/
   tags = {
     Name = "${var.env_prefix}-server"
   }
@@ -250,5 +286,8 @@ resource "aws_key_pair" "ssh-key" {
 output "ec2_public_ip" {
     value = aws_instance.myapp-server.public_ip
 }
+
+
+
 
 
