@@ -15,5 +15,8 @@ terraform.rc
 #ignore folder (MAC/OSX) metadata
 .DS_Store
 
+#ignore crash
+crash.log
+
 
 
