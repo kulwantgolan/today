@@ -1,8 +1,9 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group
 # Use default SG
-resource "aws_default_security_group" "default-sg" {
+resource "aws_security_group" "myapp-sg" {
 
     vpc_id = var.vpc_id
+    name = "myapp-sg"
 
      ingress {
       description      = "SSH from VPC"
@@ -63,7 +64,7 @@ resource "aws_instance" "myapp-server" {
   
   # if we don't specify  VPC - it will be created in the default VPC in th region
   subnet_id =   var.subnet_id #module.myapp-subnet.subnet.id   # aws_subnet.myapp-subnet-1.id
-  vpc_security_group_ids =  [aws_default_security_group.default-sg.id] # [aws_default_security_group.default-sg.id]
+  vpc_security_group_ids =  [aws_security_group.myapp-sg.id] # [aws_default_security_group.default-sg.id]
   availability_zone = var.avail_zone   #what is it is different from subnet_id provided?
 
   associate_public_ip_address = true
