@@ -13,5 +13,12 @@ variable "ec2_ami_id" {
 variable "ec2_instance_count" {
   description = "EC2 instance count"
   type        = number
-  default     = 1
+  default     = 2
+}
+
+# Assign when prompted using CLI
+variable "ec2_instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default = "t2.micro"
 }
