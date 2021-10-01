@@ -12,7 +12,7 @@
 # ############### MODULE ############### 
 
 # Private Regisrty - to host module in Terraform Cloud ---private to Organisation in Terraform Cloud
-## create a repo in github https://github.com/kulwantgolan/terraform-orivatereg-aws-s3-website.git
+## create a repo in github https://github.com/kulwantgolan/terraform-orivatereg-aws-s3-website.git (in terraform-cloud-internal folder)
 ## create a new release tag 1.0.0 in repo
 ## main.tf input.tf output.tf LIC README --> in repo
 
