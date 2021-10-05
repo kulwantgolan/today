@@ -7,17 +7,22 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.0"
     }
-
   }
 
 
+  backend "remote" {
+    organization = "hcta-demo1x"
 
+    workspaces {
+      name = "cli-driven-demo"
+    }
+  }
 
 }
 
 # Provider Block
 provider "aws" {
-  region  = var.aws_region
+  region = var.aws_region
   # profile = "default" - FOR CLOUD we are going to set access key accordingly
 }
 /*
