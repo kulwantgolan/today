@@ -125,8 +125,82 @@ terraform plan # HA = true and user = ""
 terraform apply
 website accessible on elb address
 ```
-### Dynamic blocks
+### Dynamic blocks and locals
+
+* repetable nested blocks in arguments
+ * which do not accept expressions
+* e.g. sg
+ * ingress rule (port changing but block is same/repeating)
+
+```
+c1.tf 
+c2-sg.tf
+
+instead of following:
+
+ingress {
+description = "description 1"
+from_port = 8080
+to_port = 8080
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+
+ingress {
+description = "description 2"
+from_port = 8081
+to_port = 8081
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
 
 
+Use this:
+# Define ports as list in locals block
+locals {
+ ports = [80,443,8080,8081,7080,7081]
+}
 
+#key: local.ports[0]
+#value: 80
 
+# ingress in  sg
+dynamic "ingress" {
+
+ for_each = local.ports    # key: local.ports[0] => ingress.key = 0
+ 
+ content {
+ description = "description ${ingress.key}" #ingress.key = 0 for first iteration
+ from_port = ingress.value     #ingress.value = 80 for first iteration
+ to_port = ingress.value
+ protocol = "tcp"
+ cidr_blocks = ["0.0.0.0/0"]
+ }
+}
+
+```
+
+## Terraform debug
+
+* env variable for debugging
+ * TF_LOG : log level
+  * TRACE
+  * DEBUG
+  * ERROR
+  * WARN
+  * INFO
+ * TF_LOG_PATH : Where logs stored
+
+```
+export TF_LOG=TRACE
+export TF_LOG_PATH="terraform-trace.log"  
+
+OR add in .bashrc  #permanent env variables
+OR PS> $profile
+$env:TF_LOG="TRACE"
+$env:TF_LOG_PATH="terraform-trace.log" 
+
+echo $env:TF_LOG
+echo $env:TF_LOG_PATH
+```
+* Crash.log : debug logs : if terraform crashes (panic in go runtime) # terraform in written in go 
