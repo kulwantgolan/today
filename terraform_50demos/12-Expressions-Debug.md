@@ -204,3 +204,6 @@ echo $env:TF_LOG
 echo $env:TF_LOG_PATH
 ```
 * Crash.log : debug logs : if terraform crashes (panic in go runtime) # terraform in written in go 
+
+
+* [Terraform language guide](terraform.io/docs/language/index.html)
