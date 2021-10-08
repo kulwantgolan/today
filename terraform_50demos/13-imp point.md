@@ -25,4 +25,15 @@
  * plugin_cache_dir = "$HOME/.terraform.d/plugin-cache"   # This directory must already exist 
  * or use TF_PLUGIN_CACHE_DIR
 
-
+* EC2 Instance Profiles - STSAssumeRole Q78 - https://kichik.com/2020/09/08/how-does-ec2-instance-profile-work/
+* Multiple instance of a module ? Q88
+* 
+ 
+ 
+ 
+ 
+ 
+ ```
+ what it take to be a threat hunter? explore it.
+ static and dynamic malicious code reverse engineering ?? binary instrumentation ??  quickly learn new analysis techniques?? improve our malware-analysis workflow.??
+```
