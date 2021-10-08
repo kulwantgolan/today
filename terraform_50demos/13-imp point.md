@@ -3,8 +3,10 @@
 * public registry HOSTNAME: registry.terraform.io 
 *
 * terraform CLOUD private HOSTNAME: app.terraform.io
-* Github REPOname for custom **module** - to import in Terraform Cloud **Organisation** Registry: terraform-**PROVIDER**-modulename
-* HOSTNAME/Organisation/modulename/provider : Terraform Cloud module
+* Github REPOname for custom **module** - to import in Terraform Cloud **Organisation** Registry: terraform-**PROVIDER**-modulename : terraform-<PROVIDER>-<NAME>
+* HOSTNAME/Organisation/modulename/provider : (Terraform Cloud) private module
+ * <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>
+* <NAMESPACE>/<NAME>/<PROVIDER> : refer registry module
 *
 * https://www.hashicorp.com/blog/automatic-installation-of-third-party-providers-with-terraform-0-13
  ```
@@ -27,7 +29,8 @@
 
 * EC2 Instance Profiles - STSAssumeRole Q78 - https://kichik.com/2020/09/08/how-does-ec2-instance-profile-work/
 * Multiple instance of a module ? Q88
-* 
+* terraform state mv : command can also move items to a completely different state file, enabling efficient refactoring.  Q123
+* 140 - wrap up tonight
  
  
  
