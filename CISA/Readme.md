@@ -8,7 +8,7 @@ For Effective governance and management of IS
 
 # Audit Process
 
-# Governance and management of II
+# Governance and management of IT
 
 # Acquisition/Development and Implementation of IS
 
