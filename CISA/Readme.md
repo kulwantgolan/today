@@ -5,3 +5,13 @@
 
 # ISACA code
 For Effective governance and management of IS
+
+# Audit Process
+
+# Governance and management of II
+
+# Acquisition/Development and Implementation of IS
+
+# Operations and Business Resilience of IS
+
+# Protection of Assets
